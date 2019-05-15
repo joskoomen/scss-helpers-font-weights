@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+$font-weights: (
+    'normal' : $global-weight-normal,
+    'bold' : $global-weight-bold
+) !default;
+
+$helpers-font-weights-class-prefix: 'fnt-w' !default;
+
+@mixin helpers-font-weights($responsive : false) {
+  
+  @if $responsive {
+    
+    @each $font in $font-weights {
+      $key: nth($font, 1);
+      $font-weight: nth($font, 2);
+      
+      @each $classname in $breakpoint-classes {
+        
+        @include breakpoint($classname) {
+          
+          .#{$classname}-#{$helpers-font-weights-class-prefix}-#{$key} {
+            font-weight: $font-weight !important;
+          }
+        }
+      }
+    }
+    
+  } @else {
+    
+    @each $font in $font-weights {
+      $key: nth($font, 1);
+      $font-weight: nth($font, 2);
+      
+      .#{$helpers-font-weights-class-prefix}-#{$key} {
+        font-weight: $font-weight !important;
+      }
+      
+    }
+    
+  }
+}
