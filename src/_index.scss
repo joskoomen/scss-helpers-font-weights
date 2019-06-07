@@ -11,13 +11,13 @@ $helpers-font-weights-class-prefix: 'fnt-w' !default;
   
   @if $responsive {
     
-    @each $font in $font-weights {
-      $key: nth($font, 1);
-      $font-weight: nth($font, 2);
+    @each $classname in $breakpoint-classes {
       
-      @each $classname in $breakpoint-classes {
+      @include breakpoint($classname) {
         
-        @include breakpoint($classname) {
+        @each $font in $font-weights {
+          $key: nth($font, 1);
+          $font-weight: nth($font, 2);
           
           .#{$classname}-#{$helpers-font-weights-class-prefix}-#{$key} {
             font-weight: $font-weight !important;
